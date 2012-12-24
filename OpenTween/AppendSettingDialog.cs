@@ -904,7 +904,24 @@ namespace OpenTween
                 IsNotifyUseGrowlCheckBox.Enabled = false;
             }
 
-            this.TreeViewSetting.Nodes["BasedNode"].Tag = BasedPanel;
+			this.TreeViewSetting.Nodes[0].Tag = BasedPanel;
+			//this.TreeViewSetting.Nodes[0].Nodes[0].Tag = GetPeriodPanel;
+			//this.TreeViewSetting.Nodes[0].Nodes[1].Tag = StartupPanel;
+			//this.TreeViewSetting.Nodes[0].Nodes[2].Tag = GetCountPanel;
+			//this.TreeViewSetting.Nodes["BasedNode"].Nodes["UserStreamNode"].Tag = UserStreamPanel;
+			this.TreeViewSetting.Nodes[1].Tag = ActionPanel;
+			//this.TreeViewSetting.Nodes[1].Nodes[0].Tag = TweetActPanel;
+			this.TreeViewSetting.Nodes[2].Tag = PreviewPanel;
+			//this.TreeViewSetting.Nodes[2].Nodes[0].Tag = TweetPrvPanel;
+			//this.TreeViewSetting.Nodes[2].Nodes[1].Tag = NotifyPanel;
+			this.TreeViewSetting.Nodes[3].Tag = FontPanel;
+			//this.TreeViewSetting.Nodes[3].Nodes[0].Tag = FontPanel2;
+			this.TreeViewSetting.Nodes[4].Tag = ConnectionPanel;
+			//this.TreeViewSetting.Nodes[4].Nodes[0].Tag = ProxyPanel;
+			//this.TreeViewSetting.Nodes[4].Nodes[1].Tag = CooperatePanel;
+			//this.TreeViewSetting.Nodes[4].Nodes[2].Tag = ShortUrlPanel;
+
+            /*this.TreeViewSetting.Nodes["BasedNode"].Tag = BasedPanel;
             this.TreeViewSetting.Nodes["BasedNode"].Nodes["PeriodNode"].Tag = GetPeriodPanel;
             this.TreeViewSetting.Nodes["BasedNode"].Nodes["StartUpNode"].Tag = StartupPanel;
             this.TreeViewSetting.Nodes["BasedNode"].Nodes["GetCountNode"].Tag = GetCountPanel;
@@ -919,7 +936,7 @@ namespace OpenTween
             this.TreeViewSetting.Nodes["ConnectionNode"].Tag = ConnectionPanel;
             this.TreeViewSetting.Nodes["ConnectionNode"].Nodes["ProxyNode"].Tag = ProxyPanel;
             this.TreeViewSetting.Nodes["ConnectionNode"].Nodes["CooperateNode"].Tag = CooperatePanel;
-            this.TreeViewSetting.Nodes["ConnectionNode"].Nodes["ShortUrlNode"].Tag = ShortUrlPanel;
+            this.TreeViewSetting.Nodes["ConnectionNode"].Nodes["ShortUrlNode"].Tag = ShortUrlPanel;*/
 
             this.TreeViewSetting.SelectedNode = this.TreeViewSetting.Nodes[0];
             this.TreeViewSetting.ExpandAll();

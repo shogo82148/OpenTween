@@ -46,10 +46,10 @@ namespace OpenTween
 
         public void AddItem(string id)
         {
-            if (!this.TextId.AutoCompleteCustomSource.Contains(id))
+            /*if (!this.TextId.AutoCompleteCustomSource.Contains(id))
             {
                 this.TextId.AutoCompleteCustomSource.Add(id);
-            }
+            }*/
         }
 
         public void AddRangeItem(string[] ids)
@@ -63,10 +63,10 @@ namespace OpenTween
         public List<string> GetItemList()
         {
             var ids = new List<string>();
-            for (int i = 0; i < this.TextId.AutoCompleteCustomSource.Count; ++i)
+            /*for (int i = 0; i < this.TextId.AutoCompleteCustomSource.Count; ++i)
             {
                 ids.Add(this.TextId.AutoCompleteCustomSource[i]);
-            }
+            }*/
             return ids;
         }
 
@@ -74,7 +74,7 @@ namespace OpenTween
         {
             get
             {
-                return this.TextId.AutoCompleteCustomSource.Count;
+				return 0;//this.TextId.AutoCompleteCustomSource.Count;
             }
         }
 
@@ -108,12 +108,12 @@ namespace OpenTween
             {
                 if (!string.IsNullOrEmpty(this.TextId.Text))
                 {
-                    var idx = this.TextId.AutoCompleteCustomSource.IndexOf(this.TextId.Text);
+                    /*var idx = this.TextId.AutoCompleteCustomSource.IndexOf(this.TextId.Text);
                     if (idx > -1)
                     {
                         this.TextId.Text = "";
                         this.TextId.AutoCompleteCustomSource.RemoveAt(idx);
-                    }
+                    }*/
                 }
             }
         }
@@ -147,10 +147,10 @@ namespace OpenTween
         {
             InitializeComponent();
 
-            for (int i = 0; i < ItemList.Count; ++i)
+            /*for (int i = 0; i < ItemList.Count; ++i)
             {
                 this.TextId.AutoCompleteCustomSource.Add(ItemList[i]);
-            }
+            }*/
             startChar = startCharacter;
         }
 

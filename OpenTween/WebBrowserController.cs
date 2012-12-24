@@ -290,7 +290,7 @@ namespace OpenTween
         public InternetSecurityManager(WebBrowser _WebBrowser)
         {
             // ActiveXコントロール取得
-            _WebBrowser.DocumentText = "about:blank"; //ActiveXを初期化する
+            /*_WebBrowser.DocumentText = "about:blank"; //ActiveXを初期化する
             int hresult = 0;
 
             do
@@ -341,7 +341,7 @@ namespace OpenTween
             {
                 MyCommon.TraceOut(ex, "IProfferSerive.ProfferService() HRESULT:" + ex.ErrorCode.ToString("X8") + Environment.NewLine);
                 return;
-            }
+            }*/
         }
 
         int WebBrowserAPI.IServiceProvider.QueryService(ref Guid guidService,

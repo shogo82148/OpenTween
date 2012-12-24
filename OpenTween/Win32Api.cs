@@ -40,30 +40,30 @@ namespace OpenTween
         public static void WakeupWindow(IntPtr hWnd)
         {
             // メイン・ウィンドウが最小化されていれば元に戻す
-            if (IsIconic(hWnd))
+            /*if (IsIconic(hWnd))
             {
                 ShowWindowAsync(hWnd, SW_RESTORE);
             }
 
             // メイン・ウィンドウを最前面に表示する
-            SetForegroundWindow(hWnd);
+            SetForegroundWindow(hWnd);*/
         }
 
         // 外部プロセスのメイン・ウィンドウを起動するためのWin32 API
-        [DllImport("user32.dll")]
+        /*[DllImport("user32.dll")]
         private extern static bool SetForegroundWindow(
-            IntPtr hWnd);
+            IntPtr hWnd);*/
 
         // ウィンドウの表示状態を設定
-        [DllImport("user32.dll")]
+        /*[DllImport("user32.dll")]
         private extern static bool ShowWindowAsync(
             IntPtr hWnd,
-            int nCmdShow);
+            int nCmdShow);*/
 
         // 指定されたウィンドウが最小化（ アイコン化）されているかどうかを調べる
-        [DllImport("user32.dll")]
+        /*[DllImport("user32.dll")]
         private extern static bool IsIconic(
-            IntPtr hWnd);
+            IntPtr hWnd);*/
 
         // ShowWindowAsync関数のパラメータに渡す定義値
         private const int SW_RESTORE = 9; // 画面を元の大きさに戻す
@@ -71,7 +71,7 @@ namespace OpenTween
         // 実行中の同じアプリケーションのプロセスを取得する
         public static Process GetPreviousProcess()
         {
-            var curProcess = Process.GetCurrentProcess();
+            /*var curProcess = Process.GetCurrentProcess();
             var allProcesses = Process.GetProcessesByName(curProcess.ProcessName);
 
             foreach (Process checkProcess in allProcesses)
@@ -88,7 +88,7 @@ namespace OpenTween
                         return checkProcess;
                     }
                 }
-            }
+            }*/
 
             // 同じアプリケーションのプロセスが見つからない！  
             return null;
@@ -96,26 +96,30 @@ namespace OpenTween
         #endregion
         #region "タスクトレイアイコンのクリック"
         // 指定されたクラス名およびウィンドウ名と一致するトップレベルウィンドウのハンドルを取得します
-        [DllImport("user32.dll", CharSet = CharSet.Auto, BestFitMapping = false, ThrowOnUnmappableChar = true)]
+        /*[DllImport("user32.dll", CharSet = CharSet.Auto, BestFitMapping = false, ThrowOnUnmappableChar = true)]
         private extern static IntPtr FindWindow(
             [MarshalAs(UnmanagedType.LPTStr)] string lpClassName,
-            [MarshalAs(UnmanagedType.LPTStr)] string lpWindowName);
+            [MarshalAs(UnmanagedType.LPTStr)] string lpWindowName);*/
 
         // 指定された文字列と一致するクラス名とウィンドウ名文字列を持つウィンドウのハンドルを返します
-        [DllImport("user32.dll", CharSet = CharSet.Auto, BestFitMapping = false, ThrowOnUnmappableChar = true)]
+        /*[DllImport("user32.dll", CharSet = CharSet.Auto, BestFitMapping = false, ThrowOnUnmappableChar = true)]
         private extern static IntPtr FindWindowEx(
             IntPtr hWnd1,
             IntPtr hWnd2,
             [MarshalAs(UnmanagedType.LPTStr)] string lpsz1,
-            [MarshalAs(UnmanagedType.LPTStr)] string lpsz2);
+            [MarshalAs(UnmanagedType.LPTStr)] string lpsz2);*/
 
         // 指定されたウィンドウへ、指定されたメッセージを送信します
-        [DllImport("user32.dll")]
+        /*[DllImport("user32.dll")]
         private extern static IntPtr SendMessage(
             IntPtr hwnd,
             int wMsg,
             IntPtr wParam,
-            IntPtr lParam);
+            IntPtr lParam);*/
+		/*private static IntPtr SendMessage (IntPtr hwnd, int wMsg, IntPtr wParam, IntPtr lparam)
+		{
+			return 0;
+		}
 
         // SendMessageで送信するメッセージ
         private enum Sm_Message : int
@@ -173,17 +177,21 @@ namespace OpenTween
             TBIF_TEXT = 0x2,
         }
         // 指定されたウィンドウを作成したスレッドの ID を取得します
-        [DllImport("user32.dll", SetLastError = true)]
+        /*[DllImport("user32.dll", SetLastError = true)]
         private static extern int GetWindowThreadProcessId(
             IntPtr hwnd,
-            out int lpdwProcessId);
+            out int lpdwProcessId);*/
+		private static int GetWindowThreadProcessId (IntPtr hWnd, int lpdwProcessId)
+		{
+			return 0;
+		}
 
         // 指定したプロセスIDに対するプロセスハンドルを取得します
-        [DllImport("kernel32.dll")]
+        /*[DllImport("kernel32.dll")]
         private static extern IntPtr OpenProcess(
             ProcessAccess dwDesiredAccess,
             [MarshalAs(UnmanagedType.Bool)] bool bInheritHandle,
-            int dwProcessId);
+            int dwProcessId);*/
 
         // OpenProcessで指定するアクセス権
         [Flags()]
@@ -211,13 +219,13 @@ namespace OpenTween
             Synchronize = 0x100000,
         }
         // 指定したプロセスの仮想アドレス空間にメモリ領域を確保
-        [DllImport("kernel32.dll", SetLastError = true, ExactSpelling = true)]
+        /*[DllImport("kernel32.dll", SetLastError = true, ExactSpelling = true)]
         private static extern IntPtr VirtualAllocEx(
             IntPtr hProcess,
             IntPtr lpAddress,
             IntPtr dwSize,
             AllocationTypes flAllocationType,
-            MemoryProtectionTypes flProtect);
+            MemoryProtectionTypes flProtect);*/
 
         // アロケート種類
         [Flags()]
@@ -250,16 +258,16 @@ namespace OpenTween
             WriteCombineModifierflag = 0x400,
         }
         // オープンしているカーネルオブジェクトのハンドルをクローズします
-        [DllImport("kernel32.dll", SetLastError = true)]
-        private static extern bool CloseHandle(IntPtr hHandle);
+        /*[DllImport("kernel32.dll", SetLastError = true)]
+        private static extern bool CloseHandle(IntPtr hHandle);*/
 
         // 指定されたプロセスの仮想アドレス空間内のメモリ領域を解放またはコミット解除します
-        [DllImport("kernel32.dll")]
+        /*[DllImport("kernel32.dll")]
         private static extern bool VirtualFreeEx(
             IntPtr hProcess,
             IntPtr lpAddress,
             IntPtr dwSize,
-            MemoryFreeTypes dwFreeType);
+            MemoryFreeTypes dwFreeType);*/
 
         // メモリ解放種別
         [Flags()]
@@ -268,30 +276,30 @@ namespace OpenTween
             Release = 0x8000,
         }
         //指定したプロセスのメモリ領域にデータをコピーする
-        [DllImport("kernel32.dll", SetLastError = true)]
+        /*[DllImport("kernel32.dll", SetLastError = true)]
         private static extern bool WriteProcessMemory(
             IntPtr hProcess,
             IntPtr lpBaseAddress,
             ref TBBUTTONINFO lpBuffer,
             IntPtr nSize,
-            out int lpNumberOfBytesWritten);
+            out int lpNumberOfBytesWritten);*/
 
         //指定したプロセスのメモリ領域のデータを呼び出し側プロセスのバッファにコピーする
-        [DllImport("kernel32.dll", SetLastError = true)]
+        /*[DllImport("kernel32.dll", SetLastError = true)]
         private static extern bool ReadProcessMemory(
             IntPtr hProcess,
             IntPtr lpBaseAddress,
             IntPtr lpBuffer,
             IntPtr nSize,
-            out int lpNumberOfBytesRead);
+            out int lpNumberOfBytesRead);*/
 
         //メッセージをウィンドウのメッセージ キューに置き、対応するウィンドウがメッセージを処理するのを待たずに戻ります
-        [DllImport("user32.dll", SetLastError = true, CharSet = CharSet.Auto)]
+        /*[DllImport("user32.dll", SetLastError = true, CharSet = CharSet.Auto)]
         private static extern bool PostMessage(
             IntPtr hWnd,
             uint Msg,
             IntPtr wParam,
-            IntPtr lParam);
+            IntPtr lParam);*/
 
         //PostMessageで送信するメッセージ
         private enum PM_Message : uint
@@ -303,6 +311,8 @@ namespace OpenTween
         //タスクトレイアイコンのクリック処理
         public static bool ClickTasktrayIcon(string tooltip)
         {
+			return false;
+			/*
             const string TRAY_WINDOW = "Shell_TrayWnd";
             const string TRAY_NOTIFYWINDOW = "TrayNotifyWnd";
             const string TRAY_PAGER = "SysPager";
@@ -498,28 +508,30 @@ namespace OpenTween
             {
                 CloseHandle(hProc);  //Explorerのプロセス閉じる
             }
+            */
         }
         #endregion
 
         //画面をブリンクするためのWin32API。起動時に10ページ読み取りごとに継続確認メッセージを表示する際の通知強調用
-        [DllImport("user32.dll")]
+        /*[DllImport("user32.dll")]
         private static extern int FlashWindow(
             IntPtr hwnd,
-            bool bInvert);
+            bool bInvert);*/
 
         #region "画面ブリンク用"
         public static bool FlashMyWindow(IntPtr hwnd,
             FlashSpecification flashType,
             int flashCount)
         {
-            var fInfo = new FLASHWINFO();
+            /*var fInfo = new FLASHWINFO();
             fInfo.cbSize = Convert.ToInt32(Marshal.SizeOf(fInfo));
             fInfo.hwnd = hwnd;
             fInfo.dwFlags = (int)FlashSpecification.FlashAll;
             fInfo.uCount = flashCount;
             fInfo.dwTimeout = 0;
 
-            return FlashWindowEx(ref fInfo);
+            return FlashWindowEx(ref fInfo);*/
+			return false;
         }
 
         public enum FlashSpecification : uint
@@ -532,9 +544,9 @@ namespace OpenTween
             FlashTimerNoForeground = FLASHW_TIMERNOFG,
         }
         /// http://www.atmarkit.co.jp/fdotnet/dotnettips/723flashwindow/flashwindow.html
-        [DllImport("user32.dll")]
+        /*[DllImport("user32.dll")]
         private static extern bool FlashWindowEx(
-            ref FLASHWINFO FWInfo);
+            ref FLASHWINFO FWInfo);*/
 
 
         private struct FLASHWINFO
@@ -560,18 +572,19 @@ namespace OpenTween
         private const Int32 FLASHW_TIMERNOFG = 0xC;
         #endregion
 
-        [DllImport("user32.dll")]
+        /*[DllImport("user32.dll")]
         public static extern bool ValidateRect(
             IntPtr hwnd,
-            IntPtr rect);
+            IntPtr rect);*/
+		public static extern bool ValidateRect(IntPtr hWnd, IntPtr rect);
 
         #region "スクリーンセーバー起動中か判定"
-        [DllImport("user32", CharSet = CharSet.Auto)]
+        /*[DllImport("user32", CharSet = CharSet.Auto)]
         private static extern int SystemParametersInfo(
                     int intAction,
                     int intParam,
                     ref bool bParam,
-                    int intWinIniFlag);
+                    int intWinIniFlag);*/
         // returns non-zero value if function succeeds
 
         //スクリーンセーバーが起動中かを取得する定数
@@ -579,16 +592,16 @@ namespace OpenTween
 
         public static bool IsScreenSaverRunning()
         {
-            var ret = 0;
+            //var ret = 0;
             var isRunning = false;
 
-            ret = SystemParametersInfo(SPI_GETSCREENSAVERRUNNING, 0, ref isRunning, 0);
+            //ret = SystemParametersInfo(SPI_GETSCREENSAVERRUNNING, 0, ref isRunning, 0);
             return isRunning;
         }
         #endregion
 
         #region "グローバルフック"
-        [DllImport("user32")]
+        /*[DllImport("user32")]
         private static extern int RegisterHotKey(IntPtr hwnd, int id,
             int fsModifiers, int vk);
         [DllImport("user32")]
@@ -596,12 +609,14 @@ namespace OpenTween
         [DllImport("kernel32", CharSet = CharSet.Auto, BestFitMapping = false, ThrowOnUnmappableChar = true)]
         private static extern ushort GlobalAddAtom([MarshalAs(UnmanagedType.LPTStr)] string lpString);
         [DllImport("kernel32")]
-        private static extern ushort GlobalDeleteAtom(ushort nAtom);
+        private static extern ushort GlobalDeleteAtom(ushort nAtom);*/
 
         private static int registerCount = 0;
         // register a global hot key
         public static int RegisterGlobalHotKey(int hotkeyValue, int modifiers, Form targetForm)
         {
+			return 0;
+			/*
             ushort hotkeyID = 0;
             try
             {
@@ -628,28 +643,28 @@ namespace OpenTween
                 // clean up if hotkey registration failed
                 UnregisterGlobalHotKey(hotkeyID, targetForm);
                 return 0;
-            }
+            }*/
         }
 
         // unregister a global hotkey
         public static void UnregisterGlobalHotKey(ushort hotkeyID, Form targetForm)
-        {
+        {/*
             if (hotkeyID != 0)
             {
                 UnregisterHotKey(targetForm.Handle, hotkeyID);
                 // clean up the atom list
                 GlobalDeleteAtom(hotkeyID);
                 hotkeyID = 0;
-            }
+            }*/
         }
         #endregion
 
         #region "プロセスのProxy設定"
-        [DllImport("wininet.dll", SetLastError =true)]
+        /*[DllImport("wininet.dll", SetLastError =true)]
         private static extern bool InternetSetOption(IntPtr hInternet,
                                                      int dwOption,
                                                      IntPtr lpBuffer,
-                                                     int lpdwBufferLength);
+                                                     int lpdwBufferLength);*/
 
         private struct INTERNET_PROXY_INFO : IDisposable
         {
@@ -671,7 +686,7 @@ namespace OpenTween
 
         private static void RefreshProxySettings(string strProxy)
         {
-            const int INTERNET_OPTION_PROXY = 38;
+/*            const int INTERNET_OPTION_PROXY = 38;
             //const int INTERNET_OPEN_TYPE_PRECONFIG = 0;   //IE setting
             const int INTERNET_OPEN_TYPE_DIRECT = 1;      //Direct
             const int INTERNET_OPEN_TYPE_PROXY = 3;       //Custom
@@ -731,12 +746,12 @@ namespace OpenTween
             finally
             {
                 ipi.Dispose();
-            }
+            }*/
         }
 
         private static void RefreshProxyAccount(string username, string password)
         {
-            const int INTERNET_OPTION_PROXY_USERNAME = 43;
+/*            const int INTERNET_OPTION_PROXY_USERNAME = 43;
             const int INTERNET_OPTION_PROXY_PASSWORD = 44;
 
             if (!string.IsNullOrEmpty(username) || !string.IsNullOrEmpty(password))
@@ -758,7 +773,7 @@ namespace OpenTween
                     Marshal.FreeBSTR(pUser);
                     Marshal.FreeBSTR(pPass);
                 }
-            }
+            }*/
         }
 
         public static void SetProxy(HttpConnection.ProxyType pType, string host, int port, string username, string password)

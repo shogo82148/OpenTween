@@ -894,11 +894,11 @@ namespace OpenTween
             {
                 idlist.Add(tmp.Remove(0, 1));  // @文字削除
             }
-            UID.AutoCompleteCustomSource.Clear();
-            UID.AutoCompleteCustomSource.AddRange(idlist.ToArray());
+            //UID.AutoCompleteCustomSource.Clear();
+            //UID.AutoCompleteCustomSource.AddRange(idlist.ToArray());
 
-            ExUID.AutoCompleteCustomSource.Clear();
-            ExUID.AutoCompleteCustomSource.AddRange(idlist.ToArray());
+            //ExUID.AutoCompleteCustomSource.Clear();
+            //ExUID.AutoCompleteCustomSource.AddRange(idlist.ToArray());
 
             //選択タブ変更
             if (ListTabs.Items.Count > 0)

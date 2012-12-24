@@ -1481,6 +1481,7 @@ namespace OpenTween
             //スクロール制御準備
             int smode = -1;    //-1:制御しない,-2:最新へ,その他:topitem使用
             long topId = GetScrollPos(ref smode);
+			if(_curList == null) return ;
             int befCnt = _curList.VirtualListSize;
 
             //現在の選択状態を退避
@@ -4521,8 +4522,9 @@ namespace OpenTween
                 btn.TabStop = false;
                 btn.Click += SearchButton_Click;
             }
-
-            this.ListTab.Controls.Add(_tabPage);
+		
+			 _tabPage.Tag = _listCustom;
+            //this.ListTab.Controls.Add(_tabPage);
             _tabPage.Controls.Add(_listCustom);
 
             if (tabType == MyCommon.TabUsageType.PublicSearch) _tabPage.Controls.Add(pnl);
@@ -4681,7 +4683,6 @@ namespace OpenTween
             this.ListTab.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
-            _tabPage.Tag = _listCustom;
             return true;
         }
 
@@ -4863,7 +4864,9 @@ namespace OpenTween
             SetMainWindowTitle();
             SetStatusLabelUrl();
             if (ListTab.Focused || ((Control)ListTab.SelectedTab.Tag).Focused) this.Tag = ListTab.Tag;
+			try {
             TabMenuControl(ListTab.SelectedTab.Text);
+			} catch(Exception) {}
             this.PushSelectPostChain();
         }
 
@@ -6632,7 +6635,7 @@ namespace OpenTween
                         switch (KeyCode)
                         {
                             case Keys.A:
-                                PostBrowser.Document.ExecCommand("SelectAll", false, null);
+                                //PostBrowser.Document.ExecCommand("SelectAll", false, null);
                                 return true;
                             case Keys.C:
                             case Keys.Insert:
@@ -10287,7 +10290,7 @@ namespace OpenTween
         private void SelectionAllContextMenuItem_Click(object sender, EventArgs e)
         {
             //発言詳細ですべて選択
-            PostBrowser.Document.ExecCommand("SelectAll", false, null);
+            //PostBrowser.Document.ExecCommand("SelectAll", false, null);
         }
 
         private void SearchWikipediaContextMenuItem_Click(object sender, EventArgs e)

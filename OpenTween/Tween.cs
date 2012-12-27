@@ -1091,9 +1091,10 @@ namespace OpenTween
             TimerRefreshIcon.Enabled = true;
 
             //状態表示部の初期化（画面右下）
-            StatusLabel.Text = "";
+            /*StatusLabel.Text = "";
             StatusLabel.AutoToolTip = false;
-            StatusLabel.ToolTipText = "";
+            StatusLabel.ToolTipText = "";*/
+
             //文字カウンタ初期化
             lblLen.Text = GetRestStatusCount(true, false).ToString();
 
@@ -2892,7 +2893,7 @@ namespace OpenTween
 
         private void GetTimelineWorker_ProgressChanged(object sender, ProgressChangedEventArgs e)
         {
-            if (MyCommon._endingFlag) return;
+            /*if (MyCommon._endingFlag) return;
             if (e.ProgressPercentage > 100)
             {
                 //発言投稿
@@ -2905,7 +2906,7 @@ namespace OpenTween
             {
                 string smsg = (string)e.UserState;
                 if (smsg.Length > 0) StatusLabel.Text = smsg;
-            }
+            }*/
         }
 
         private void GetTimelineWorker_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
@@ -4418,7 +4419,7 @@ namespace OpenTween
             _tabPage.SuspendLayout();
 
             /// UserTimeline関連
-            Label label = null;
+            /*Label label = null;
             if (tabType == MyCommon.TabUsageType.UserTimeline || tabType == MyCommon.TabUsageType.Lists)
             {
                 label = new Label();
@@ -4521,14 +4522,14 @@ namespace OpenTween
                 btn.Dock = DockStyle.Right;
                 btn.TabStop = false;
                 btn.Click += SearchButton_Click;
-            }
+            }*/
 		
 			 _tabPage.Tag = _listCustom;
-            //this.ListTab.Controls.Add(_tabPage);
+            this.ListTab.Controls.Add(_tabPage);
             _tabPage.Controls.Add(_listCustom);
 
-            if (tabType == MyCommon.TabUsageType.PublicSearch) _tabPage.Controls.Add(pnl);
-            if (tabType == MyCommon.TabUsageType.UserTimeline || tabType == MyCommon.TabUsageType.Lists) _tabPage.Controls.Add(label);
+            //if (tabType == MyCommon.TabUsageType.PublicSearch) _tabPage.Controls.Add(pnl);
+            //if (tabType == MyCommon.TabUsageType.UserTimeline || tabType == MyCommon.TabUsageType.Lists) _tabPage.Controls.Add(label);
 
             _tabPage.Location = new Point(4, 4);
             _tabPage.Name = "CTab" + cnt.ToString();
@@ -4673,7 +4674,7 @@ namespace OpenTween
                 }
             }
 
-            if (tabType == MyCommon.TabUsageType.PublicSearch) pnl.ResumeLayout(false);
+            //if (tabType == MyCommon.TabUsageType.PublicSearch) pnl.ResumeLayout(false);
         
             _tabPage.ResumeLayout(false);
 
@@ -5062,7 +5063,7 @@ namespace OpenTween
         {
             //文字数カウント
             int pLen = 140 - StatusText.Text.Length;
-            if (this.NotifyIcon1 == null || !this.NotifyIcon1.Visible) return pLen;
+            /*if (this.NotifyIcon1 == null || !this.NotifyIcon1.Visible) return pLen;
             if ((isAuto && !MyCommon.IsKeyDown(Keys.Control) && SettingDialog.PostShiftEnter) ||
                 (isAuto && !MyCommon.IsKeyDown(Keys.Shift) && !SettingDialog.PostShiftEnter) ||
                 (!isAuto && isAddFooter))
@@ -5075,12 +5076,12 @@ namespace OpenTween
             if (!string.IsNullOrEmpty(HashMgr.UseHash))
             {
                 pLen -= HashMgr.UseHash.Length + 1;
-            }
+            }*/
             //foreach (Match m in Regex.Matches(StatusText.Text, "https?:\/\/[-_.!~*//()a-zA-Z0-9;\/?:\@&=+\$,%#^]+"))
             //{
             //    pLen += m.Length - SettingDialog.TwitterConfiguration.ShortUrlLength;
             //}
-            foreach (Match m in Regex.Matches(StatusText.Text, Twitter.rgUrl, RegexOptions.IgnoreCase))
+           /* foreach (Match m in Regex.Matches(StatusText.Text, Twitter.rgUrl, RegexOptions.IgnoreCase))
             {
                 string before = m.Result("${before}");
                 string url = m.Result("${url}");
@@ -5128,7 +5129,7 @@ namespace OpenTween
             if (ImageSelectionPanel.Visible && ImageSelectedPicture.Tag != null && !string.IsNullOrEmpty(this.ImageService))
             {
                 pLen -= SettingDialog.TwitterConfiguration.CharactersReservedPerMedia;
-            }
+            }*/
             return pLen;
         }
 
@@ -6236,8 +6237,8 @@ namespace OpenTween
                     if (PostBrowser.DocumentText != dTxt)
                     {
                         PostBrowser.Visible = false;
-                        PostBrowser.DocumentText = dTxt;
-
+                        //PostBrowser.DocumentText = dTxt;
+						PostBrowser.Url = new Uri("data:text/html;charset=utf-8," + dTxt);
                         this.SplitContainer3.Panel2Collapsed = true;
                         this.tweetThumbnail1.ShowThumbnailAsync(_curPost);
                     }

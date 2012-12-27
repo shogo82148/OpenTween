@@ -2885,7 +2885,7 @@ namespace OpenTween
                 catch(Exception ex)
                 {
                     MyCommon.TraceOut(ex, MethodBase.GetCurrentMethod().Name + " " + content);
-                    MessageBox.Show("Parse Error(CreateDirectMessagesFromJson)");
+                    //MessageBox.Show("Parse Error(CreateDirectMessagesFromJson)");
                     continue;
                 }
 
@@ -3785,6 +3785,8 @@ namespace OpenTween
         }
         public string CreateHtmlAnchor(string Text, List<string> AtList, Dictionary<string, string> media)
         {
+			return Text;
+			/*
             if (Text == null) return null;
             var retStr = Text.Replace("&gt;", "<<<<<tweenだいなり>>>>>").Replace("&lt;", "<<<<<tweenしょうなり>>>>>");
             //uriの正規表現
@@ -3905,9 +3907,9 @@ namespace OpenTween
 
             retStr = retStr.Replace("<<<<<tweenだいなり>>>>>", "&gt;").Replace("<<<<<tweenしょうなり>>>>>", "&lt;");
 
-            //retStr = AdjustHtml(ShortUrl.Resolve(PreProcessUrl(retStr), true)) //IDN置換、短縮Uri解決、@リンクを相対→絶対にしてtarget属性付与
+            retStr = AdjustHtml(ShortUrl.Resolve(PreProcessUrl(retStr), true)) //IDN置換、短縮Uri解決、@リンクを相対→絶対にしてtarget属性付与
             retStr = AdjustHtml(PreProcessUrl(retStr)); //IDN置換、短縮Uri解決、@リンクを相対→絶対にしてtarget属性付与
-            return retStr;
+            return retStr;*/
         }
 
         private class EntityInfo
@@ -4019,7 +4021,7 @@ namespace OpenTween
                 }
             }
 
-            ret = Regex.Replace(ret, "(^|[^a-zA-Z0-9_/&#＃@＠>=.~])(sm|nm)([0-9]{1,10})", "$1<a href=\"http://www.nicovideo.jp/watch/$2$3\">$2$3</a>");
+            //ret = Regex.Replace(ret, "(^|[^a-zA-Z0-9_/&#＃@＠>=.~])(sm|nm)([0-9]{1,10})", "$1<a href=\"http://www.nicovideo.jp/watch/$2$3\">$2$3</a>");
             ret = AdjustHtml(ShortUrl.Resolve(PreProcessUrl(ret), false)); //IDN置換、短縮Uri解決、@リンクを相対→絶対にしてtarget属性付与
 
             return ret;
